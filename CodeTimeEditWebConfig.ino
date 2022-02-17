@@ -27,6 +27,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 #define OutputPin D6
 #define BUZZER1 D7
 #define FORCE_RTC_UPDATE 2
+#define SOLENOID D8
 
   char blynk_token[40] = "";
   bool shouldSaveConfig = false;
@@ -166,7 +167,8 @@ void setup() {
     pinMode(MUX_B, OUTPUT);
     pinMode(MUX_C, OUTPUT);
     pinMode(OutputPin, OUTPUT);
-    pinMode(BUZZER1, OUTPUT); 
+    pinMode(BUZZER1, OUTPUT);
+    pinMode(SOLENOID, OUTPUT); 
     digitalWrite(OutputPin,LOW);
     }
     
@@ -233,6 +235,10 @@ BLYNK_WRITE(V1)
     lcd.setCursor(0, 0);
     lcd.print("Sound OFF");
     digitalWrite(BUZZER1, HIGH);
+    digitalWrite(SOLENOID, HIGH);
+    delay(1000);
+    digitalWrite(SOLENOID, LOW);
+    delay(1000);
   }
   else
   {    
